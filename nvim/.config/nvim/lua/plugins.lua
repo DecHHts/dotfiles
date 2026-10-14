@@ -14,15 +14,21 @@ require("lazy").setup({
   -- ============================
   -- 配色方案
   -- ============================
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup({ flavour = "mocha" })
-      vim.cmd.colorscheme("catppuccin")
-    end,
-  },
+{
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("tokyonight").setup({
+      style = "night",
+      on_colors = function(c)
+        c.bg = "#0d1117"        -- Ayu 风格的近黑背景，和 Ghostty 一致
+        c.bg_dark = "#0a0d12"   -- 侧边栏、浮窗
+      end,
+    })
+    vim.cmd.colorscheme("tokyonight-night")
+  end,
+},
 
   -- ============================
   -- 语法高亮（Treesitter，对 Verilog/C 支持很好）
