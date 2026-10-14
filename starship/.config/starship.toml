@@ -1,0 +1,117 @@
+# ============================
+# 全局设置
+# ============================
+format = """
+[\ue0b6](fg:#89b4fa)\
+$os\
+$username\
+[\ue0b4](bg:#a6e3a1 fg:#89b4fa)\
+$directory\
+[\ue0b4](fg:#a6e3a1)\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$rust\
+$golang\
+$fill\
+$cmd_duration\
+$line_break\
+$character"""
+
+palette = "catppuccin_mocha"
+
+[palettes.catppuccin_mocha]
+base = "#1e1e2e"
+text = "#cdd6f4"
+
+# ============================
+# 系统图标
+# ============================
+[os]
+disabled = false
+style = "bg:#89b4fa fg:#1e1e2e"
+
+[os.symbols]
+Macos = "󰀵"
+
+[username]
+show_always = true
+style_user = "bg:#89b4fa fg:#1e1e2e"
+style_root = "bg:#89b4fa fg:#1e1e2e"
+format = '[ $user ]($style)'
+
+# ============================
+# 目录
+# ============================
+[directory]
+style = "bg:#a6e3a1 fg:#1e1e2e"
+format = "[ $path ]($style)"
+truncation_length = 0      
+truncate_to_repo = false   
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+# ============================
+# Git
+# ============================
+[git_branch]
+symbol = ""
+style = "bg:#f9e2af fg:#1e1e2e"
+format = " [\ue0b6](fg:#f9e2af)[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:#f9e2af fg:#1e1e2e"
+format = "[$all_status$ahead_behind ]($style)[\ue0b4](fg:#f9e2af)"
+
+# ============================
+# 编程语言 / 工具链（结合你的 IC 设计与全栈开发场景）
+# ============================
+[nodejs]
+symbol = ""
+style = "bg:#fab387 fg:#1e1e2e"
+format = " [\ue0b6](fg:#fab387)[ $symbol ($version) ]($style)[\ue0b4](fg:#fab387)"
+
+[python]
+symbol = "󰌠"
+style = "bg:#fab387 fg:#1e1e2e"
+format = " [\ue0b6](fg:#fab387)[ $symbol ($version) ]($style)[\ue0b4](fg:#fab387)"
+
+[rust]
+symbol = ""
+style = "bg:#fab387 fg:#1e1e2e"
+format = " [\ue0b6](fg:#fab387)[ $symbol ($version) ]($style)[\ue0b4](fg:#fab387)"
+
+[golang]
+symbol = ""
+style = "bg:#fab387 fg:#1e1e2e"
+format = " [\ue0b6](fg:#fab387)[ $symbol ($version) ]($style)[\ue0b4](fg:#fab387)"
+
+# ============================
+# 命令执行时间
+# ============================
+[cmd_duration]
+min_time = 2000
+format = "took [$duration]($style) "
+style = "fg:#f9e2af"
+
+# ============================
+# 填充 & 换行
+# ============================
+[fill]
+symbol = " "
+
+[line_break]
+disabled = false
+
+# ============================
+# 命令行提示符
+# ============================
+[character]
+success_symbol = "[❯](bold fg:#a6e3a1)"
+error_symbol = "[❯](bold fg:#f38ba8)"
+vicmd_symbol = "[❮](bold fg:#89b4fa)"
