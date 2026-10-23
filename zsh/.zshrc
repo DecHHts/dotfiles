@@ -110,3 +110,8 @@ eval "$(starship init zsh)"
 vnc-off()  { pkill -f "5901:localhost:5901" 2>/dev/null; }
 vnc-home() { vnc-off; ssh -fN -L 5901:localhost:5901 eda; }
 vnc-ts()   { vnc-off; ssh -fN -L 5901:localhost:5901 eda-ts; }
+
+# ============================================================
+# C语言学习命令
+# ============================================================
+run() { local f="$1"; shift; gcc -Wall -Wextra -std=c11 -g -fsanitize=address,undefined "$f" -o /tmp/a.out -lm && /tmp/a.out "$@"; }
