@@ -6,7 +6,17 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
 # Homebrew 环境（Apple Silicon 路径，Intel 芯片改成 /usr/local）
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ "$OSTYPE" == darwin* ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  ZPLUG="/opt/homebrew/share"
+  HSS="$ZPLUG/zsh-history-substring-search/zsh-history-substring-search.zsh"
+else
+  export PATH="$HOME/.local/bin:$PATH"
+  ZPLUG="/usr/share"
+  HSS="$HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh"
+  bindkey '^[[1;5C' forward-word    # Ctrl+→ 按词移动
+  bindkey '^[[1;5D' backward-word   # Ctrl+← 按词移动
+fi
 
 # ============================================================
 # 历史记录设置
@@ -47,15 +57,14 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # 插件加载（Homebrew 安装路径）
 # ============================================================
 # 语法高亮（必须放在插件加载的最后）
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+source $ZPLUG/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # 自动建议（根据历史输入灰色提示）
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZPLUG/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # 历史子串搜索（上下键根据已输入内容搜索历史）
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $HSS
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
@@ -101,6 +110,7 @@ fi
 # ============================================================
 # Starship 提示符（必须放在 .zshrc 最后）
 # ============================================================
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 eval "$(starship init zsh)"
 
 
